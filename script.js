@@ -1,8 +1,5 @@
 
-const myLibrary = [
-  {title: "Harry Potter", author: "J.K Rowling", pages: 12, read: false},
-  {title: "The Beginning After The End", author: "TurtleMe", pages: 1239, read: true}
-];
+const myLibrary = [];
 
 function Book(title, author, pages, read){
   if(!new.target){
@@ -20,6 +17,8 @@ function addBookToLibrary(title, author, pages, read) {
   myLibrary.push(newBook)
 }
 
+
+
 function printingLibrary() {
   const Books = document.querySelector(".new-books");
   Books.textContent = ''
@@ -27,27 +26,79 @@ function printingLibrary() {
   
   myLibrary.forEach((element) => {
   const bookCard = document.createElement("div");
-  
+  bookCard.classList.add("bookCard");
   Books.appendChild(bookCard);
+
+  const clear = document.createElement("button");
+  clear.classList.add("clear");
+  bookCard.appendChild(clear);
+  clear.dataset.userID = element.id
+  clear.textContent = "Clear"
+  
+
+  clear.addEventListener("click", (e) => {
+    const ID = (element) => element.id == e.target.dataset.userID;
+    const index = myLibrary.findIndex(ID);
+    myLibrary.splice(index, 1);
+    printingLibrary();
+    
+  })
+
+
+
+  const titlePair = document.createElement("div");
+  titlePair.classList.add("titlePair");
+  const authorPair = document.createElement("div");
+  authorPair.classList.add("authorPair");
+  const pagesPair = document.createElement("div");
+  pagesPair.classList.add("pagesPair");
+  const readPair = document.createElement("div");
+  readPair.classList.add("readPair");
+
   const Title = document.createElement("div");
   const Author = document.createElement("div");
   const Pages = document.createElement("div");
   const Read = document.createElement("div");
 
-  bookCard.appendChild(Title);
-  bookCard.appendChild(Author);
-  bookCard.appendChild(Pages);
-  bookCard.appendChild(Read);
+  const titleName = document.createElement("div");
+  const authorName = document.createElement("div");
+  const numberOfPages = document.createElement("div");
+  const ifRead = document.createElement("div");
+  
+  // Pairs appending to the bookcard so now we can have format Title: Harry potter
+  bookCard.appendChild(titlePair);
+  bookCard.appendChild(authorPair);
+  bookCard.appendChild(pagesPair);
+  bookCard.appendChild(readPair);
 
-  Title.textContent = element.title
-  Author.textContent = element.author
-  Pages.textContent = element.pages
-  Read.textContent = element.read
+  //title Pair
+  titlePair.appendChild(Title);
+  titlePair.appendChild(titleName);
+  authorPair.appendChild(Author);
+  authorPair.appendChild(authorName);
+  pagesPair.appendChild(Pages);
+  pagesPair.appendChild(numberOfPages);
+  readPair.appendChild(Read);
+  readPair.appendChild(ifRead);
+
+  
+  Title.textContent = "Title: "
+  Author.textContent = "Author: "
+  Pages.textContent = "Pages: "
+  Read.textContent = "Read: "
+  
+  titleName.textContent = element.title
+  authorName.textContent = element.author
+  numberOfPages.textContent = element.pages
+  ifRead.textContent = element.read
   
   
     }
   )
 }
+
+
+
 
 // const addButton = document.querySelector(".add-button");
 
@@ -65,4 +116,15 @@ submitButton.addEventListener("submit", (e) => {
   addBookToLibrary(title, author, pages, read);
   printingLibrary()
   e.preventDefault();
+})
+
+const clearButton = document.querySelector(".clear-button");
+clearButton.addEventListener("click", (e) =>{
+  const Books = document.querySelector(".new-books");
+  Books.textContent = ''
+  myLibrary.length = 0;
+  for(let i = 0; i < myLibrary.length; i++) {
+    myLibrary.pop();
+  }
+  
 })

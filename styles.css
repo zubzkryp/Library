@@ -37,5 +37,37 @@ body {
     grid-row: 2 / 3;
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    place-items: center;
     
+}
+
+.new-books > div {
+    max-width: 200px;
+    max-height: 200px;
+    /* display: flex;
+    justify-content: center;
+    align-items: center; */
+    background-color: #eeeeee;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    padding: 50px;
+}
+
+.titlePair, .authorPair,
+.pagesPair, .readPair {
+    display: flex;
+    gap: 4px;
+}
+
+.bookCard {
+    position: relative;
+}
+
+.clear {
+    min-height: 15px;
+    min-width: 30px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    margin-left: 15px;
+    margin-top: 20px;
 }

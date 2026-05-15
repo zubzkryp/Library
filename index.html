@@ -10,6 +10,7 @@
         <div class="container">
             <div class="header">   
                 <div class="title">My Library</div>
+                <button class="clear-button">Clear</button>
                 <button class="add-button" command="show-modal" commandfor="my-dialog">+Add Book</button>
             </div>
             <dialog id="my-dialog">
@@ -17,23 +18,24 @@
                     <div class="information">
                         <div class="TITLE">
                             <label for="title">Title</label>
-                            <input type="text" name="bookTitle" id="title" placeholder="Harry Potter"/>
+                            <input type="text" name="bookTitle" id="title" placeholder="Harry Potter" required/>
                         </div>
                         <div class="AUTHOR">
                             <label for="author">Author</label>
-                            <input type="text" name="bookAuthor" id="author" placeholder="J.K Rowling"/>
+                            <input type="text" name="bookAuthor" id="author" placeholder="J.K Rowling" required/>
                         </div>
                         <div class="PAGES">
                             <label for="pages">How many pages have you read?</label>
-                            <input type="text" name="bookPages" id="pages" placeholder="200"/>
+                            <input type="text" name="bookPages" id="pages" placeholder="200" required/>
                         </div>
                         <div class="READ">
                             <label for="read">Have you finished it?</label>
-                            <input type="text" name="bookRead" id="read" placeholder="Yes/No"/>
+                            <input type="text" name="bookRead" id="read" placeholder="Yes/No" required/>
                         </div>
                     </div>
                     <button class="submitButton" type="submit">Submit</button>
                 </form>
+                <button commandfor="my-dialog" command="close">Close</button>
             </dialog>
             <div class="new-books">
                 
