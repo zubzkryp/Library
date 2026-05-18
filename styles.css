@@ -71,3 +71,13 @@ body {
     margin-left: 15px;
     margin-top: 20px;
 }
+
+.readStatus {
+    min-height: 15px;
+    min-width: 30px;
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin-right: 15px;
+    margin-top: 20px;
+}

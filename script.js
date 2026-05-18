@@ -17,6 +17,14 @@ function addBookToLibrary(title, author, pages, read) {
   myLibrary.push(newBook)
 }
 
+Book.prototype.toggleRead = function () {
+  if(this.read.toLowerCase() == "no") {
+    this.read = "Yes"
+  }
+  else {
+    this.read = "No"
+  }
+}
 
 
 function printingLibrary() {
@@ -43,6 +51,21 @@ function printingLibrary() {
     printingLibrary();
     
   })
+
+  const readStatus = document.createElement("button")
+  readStatus.classList.add("readStatus")
+  bookCard.appendChild(readStatus)
+  readStatus.dataset.userID = element.id
+  readStatus.textContent = "Read Status"
+
+  readStatus.addEventListener("click", (e) => {
+    const ID = (element) => element.id == e.target.dataset.userID;
+    const index = myLibrary.findIndex(ID);
+    myLibrary[index].toggleRead()
+    readStatus.textContent = "Read Status"
+    ifRead.textContent = myLibrary[index].read
+  })
+  
 
 
 
