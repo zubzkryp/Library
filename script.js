@@ -1,30 +1,36 @@
+class Library {
+  static myLibrary = [];
 
-const myLibrary = [];
-
-function Book(title, author, pages, read){
-  if(!new.target){
-    throw Error("You must use the new operator to call")
-  }
-  this.title = title;
-  this.author = author;
-  this.pages = pages;
-  this.read = read;
-  this.id = self.crypto.randomUUID();
-}
-
-function addBookToLibrary(title, author, pages, read) {
+  static addBookToLibrary(title, author, pages, read) {
   const newBook = new Book(title, author, pages, read)
-  myLibrary.push(newBook)
+  Library.myLibrary.push(newBook)
 }
 
-Book.prototype.toggleRead = function () {
-  if(this.read.toLowerCase() == "no") {
-    this.read = "Yes"
-  }
-  else {
-    this.read = "No"
-  }
 }
+
+class Book {
+
+    constructor(title, author, pages, read) {
+    this.title = title;
+    this.author = author;
+    this.pages = pages;
+    this.read = read;
+    this.id = self.crypto.randomUUID();
+  }
+
+    toggleRead() {
+      if(this.read.toLowerCase() == "no") {
+      this.read = "Yes"
+    }
+    else {
+      this.read = "No"
+    }
+  }
+
+
+
+}
+
 
 
 function printingLibrary() {
@@ -32,7 +38,7 @@ function printingLibrary() {
   Books.textContent = ''
   
   
-  myLibrary.forEach((element) => {
+  Library.myLibrary.forEach((element) => {
   const bookCard = document.createElement("div");
   bookCard.classList.add("bookCard");
   Books.appendChild(bookCard);
@@ -46,8 +52,8 @@ function printingLibrary() {
 
   clear.addEventListener("click", (e) => {
     const ID = (element) => element.id == e.target.dataset.userID;
-    const index = myLibrary.findIndex(ID);
-    myLibrary.splice(index, 1);
+    const index = Library.myLibrary.findIndex(ID);
+    Library.myLibrary.splice(index, 1);
     printingLibrary();
     
   })
@@ -60,10 +66,10 @@ function printingLibrary() {
 
   readStatus.addEventListener("click", (e) => {
     const ID = (element) => element.id == e.target.dataset.userID;
-    const index = myLibrary.findIndex(ID);
-    myLibrary[index].toggleRead()
+    const index = Library.myLibrary.findIndex(ID);
+    Library.myLibrary[index].toggleRead()
     readStatus.textContent = "Read Status"
-    ifRead.textContent = myLibrary[index].read
+    ifRead.textContent =Library.myLibrary[index].read
   })
   
 
@@ -136,7 +142,7 @@ submitButton.addEventListener("submit", (e) => {
   const author = document.getElementById("author").value;
   const pages = document.getElementById("pages").value;
   const read = document.getElementById("read").value;
-  addBookToLibrary(title, author, pages, read);
+  Library.addBookToLibrary(title, author, pages, read);
   printingLibrary()
   e.preventDefault();
 })
@@ -145,9 +151,9 @@ const clearButton = document.querySelector(".clear-button");
 clearButton.addEventListener("click", (e) =>{
   const Books = document.querySelector(".new-books");
   Books.textContent = ''
-  myLibrary.length = 0;
-  for(let i = 0; i < myLibrary.length; i++) {
-    myLibrary.pop();
+  Library.myLibrary.length = 0;
+  for(let i = 0; i < Library.myLibrary.length; i++) {
+    Library.myLibrary.pop();
   }
   
 })
