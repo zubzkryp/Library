@@ -51,9 +51,7 @@ function printingLibrary() {
   
 
   clear.addEventListener("click", (e) => {
-    const ID = (element) => element.id == e.target.dataset.userID;
-    const index = Library.myLibrary.findIndex(ID);
-    Library.myLibrary.splice(index, 1);
+    removeBook(e.target.dataset.userID)
     printingLibrary();
     
   })
@@ -65,11 +63,8 @@ function printingLibrary() {
   readStatus.textContent = "Read Status"
 
   readStatus.addEventListener("click", (e) => {
-    const ID = (element) => element.id == e.target.dataset.userID;
-    const index = Library.myLibrary.findIndex(ID);
-    Library.myLibrary[index].toggleRead()
-    readStatus.textContent = "Read Status"
-    ifRead.textContent =Library.myLibrary[index].read
+    index = readLogic(e.target.dataset.userID)
+    printingLibrary();
   })
   
 
@@ -126,7 +121,19 @@ function printingLibrary() {
   )
 }
 
+function removeBook(id) {
+    const ID = (element) => element.id == id;
+    const index = Library.myLibrary.findIndex(ID);
+    Library.myLibrary.splice(index, 1);
+}
 
+function readLogic(id) {
+  const ID = (element) => element.id == id;
+  const index = Library.myLibrary.findIndex(ID);
+  Library.myLibrary[index].toggleRead()
+  return index
+  
+}
 
 
 // const addButton = document.querySelector(".add-button");
@@ -152,8 +159,6 @@ clearButton.addEventListener("click", (e) =>{
   const Books = document.querySelector(".new-books");
   Books.textContent = ''
   Library.myLibrary.length = 0;
-  for(let i = 0; i < Library.myLibrary.length; i++) {
-    Library.myLibrary.pop();
-  }
+
   
 })
